@@ -12,7 +12,7 @@ defmodule Hello.OrdersFixtures do
       attrs
       |> Enum.into(%{
         total_price: "120.5",
-        user_uuid: "7488a646-e31f-11e4-aace-600308960662"
+        user_id: "7488a646-e31f-11e4-aace-600308960662"
       })
       |> Hello.Orders.create_order()
 

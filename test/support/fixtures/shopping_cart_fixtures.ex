@@ -5,10 +5,10 @@ defmodule Hello.ShoppingCartFixtures do
   """
 
   @doc """
-  Generate a unique cart user_uuid.
+  Generate a unique cart user_id.
   """
-  def unique_cart_user_uuid do
-    raise "implement the logic to generate a unique cart user_uuid"
+  def unique_cart_user_id do
+    raise "implement the logic to generate a unique cart user_id"
   end
 
   @doc """
@@ -18,7 +18,7 @@ defmodule Hello.ShoppingCartFixtures do
     {:ok, cart} =
       attrs
       |> Enum.into(%{
-        user_uuid: unique_cart_user_uuid()
+        user_id: unique_cart_user_id()
       })
       |> Hello.ShoppingCart.create_cart()
 

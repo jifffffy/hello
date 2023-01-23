@@ -19,7 +19,7 @@ defmodule Hello.Orders do
 
     order =
       Ecto.Changeset.change(%Order{},
-        user_uuid: cart.user_uuid,
+        user_id: cart.user_id,
         total_price: ShoppingCart.total_cart_price(cart),
         line_items: line_items
       )
@@ -63,9 +63,9 @@ defmodule Hello.Orders do
       ** (Ecto.NoResultsError)
 
   """
-  def get_order!(user_uuid, id) do
+  def get_order!(user_id, id) do
     Order
-    |> Repo.get_by!(id: id, user_uuid: user_uuid)
+    |> Repo.get_by!(id: id, user_id: user_id)
     |> Repo.preload(line_items: [:product])
   end
 

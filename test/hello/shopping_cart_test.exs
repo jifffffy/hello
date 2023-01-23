@@ -8,7 +8,7 @@ defmodule Hello.ShoppingCartTest do
 
     import Hello.ShoppingCartFixtures
 
-    @invalid_attrs %{user_uuid: nil}
+    @invalid_attrs %{user_id: nil}
 
     test "list_carts/0 returns all carts" do
       cart = cart_fixture()
@@ -21,10 +21,10 @@ defmodule Hello.ShoppingCartTest do
     end
 
     test "create_cart/1 with valid data creates a cart" do
-      valid_attrs = %{user_uuid: "7488a646-e31f-11e4-aace-600308960662"}
+      valid_attrs = %{user_id: "7488a646-e31f-11e4-aace-600308960662"}
 
       assert {:ok, %Cart{} = cart} = ShoppingCart.create_cart(valid_attrs)
-      assert cart.user_uuid == "7488a646-e31f-11e4-aace-600308960662"
+      assert cart.user_id == "7488a646-e31f-11e4-aace-600308960662"
     end
 
     test "create_cart/1 with invalid data returns error changeset" do
@@ -33,10 +33,10 @@ defmodule Hello.ShoppingCartTest do
 
     test "update_cart/2 with valid data updates the cart" do
       cart = cart_fixture()
-      update_attrs = %{user_uuid: "7488a646-e31f-11e4-aace-600308960668"}
+      update_attrs = %{user_id: "7488a646-e31f-11e4-aace-600308960668"}
 
       assert {:ok, %Cart{} = cart} = ShoppingCart.update_cart(cart, update_attrs)
-      assert cart.user_uuid == "7488a646-e31f-11e4-aace-600308960668"
+      assert cart.user_id == "7488a646-e31f-11e4-aace-600308960668"
     end
 
     test "update_cart/2 with invalid data returns error changeset" do
@@ -90,14 +90,19 @@ defmodule Hello.ShoppingCartTest do
       cart_item = cart_item_fixture()
       update_attrs = %{price_when_carted: "456.7", quantity: 43}
 
-      assert {:ok, %CartItem{} = cart_item} = ShoppingCart.update_cart_item(cart_item, update_attrs)
+      assert {:ok, %CartItem{} = cart_item} =
+               ShoppingCart.update_cart_item(cart_item, update_attrs)
+
       assert cart_item.price_when_carted == Decimal.new("456.7")
       assert cart_item.quantity == 43
     end
 
     test "update_cart_item/2 with invalid data returns error changeset" do
       cart_item = cart_item_fixture()
-      assert {:error, %Ecto.Changeset{}} = ShoppingCart.update_cart_item(cart_item, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               ShoppingCart.update_cart_item(cart_item, @invalid_attrs)
+
       assert cart_item == ShoppingCart.get_cart_item!(cart_item.id)
     end
 

@@ -8,7 +8,7 @@ defmodule Hello.OrdersTest do
 
     import Hello.OrdersFixtures
 
-    @invalid_attrs %{total_price: nil, user_uuid: nil}
+    @invalid_attrs %{total_price: nil, user_id: nil}
 
     test "list_orders/0 returns all orders" do
       order = order_fixture()
@@ -21,11 +21,11 @@ defmodule Hello.OrdersTest do
     end
 
     test "create_order/1 with valid data creates a order" do
-      valid_attrs = %{total_price: "120.5", user_uuid: "7488a646-e31f-11e4-aace-600308960662"}
+      valid_attrs = %{total_price: "120.5", user_id: "7488a646-e31f-11e4-aace-600308960662"}
 
       assert {:ok, %Order{} = order} = Orders.create_order(valid_attrs)
       assert order.total_price == Decimal.new("120.5")
-      assert order.user_uuid == "7488a646-e31f-11e4-aace-600308960662"
+      assert order.user_id == "7488a646-e31f-11e4-aace-600308960662"
     end
 
     test "create_order/1 with invalid data returns error changeset" do
@@ -34,11 +34,11 @@ defmodule Hello.OrdersTest do
 
     test "update_order/2 with valid data updates the order" do
       order = order_fixture()
-      update_attrs = %{total_price: "456.7", user_uuid: "7488a646-e31f-11e4-aace-600308960668"}
+      update_attrs = %{total_price: "456.7", user_id: "7488a646-e31f-11e4-aace-600308960668"}
 
       assert {:ok, %Order{} = order} = Orders.update_order(order, update_attrs)
       assert order.total_price == Decimal.new("456.7")
-      assert order.user_uuid == "7488a646-e31f-11e4-aace-600308960668"
+      assert order.user_id == "7488a646-e31f-11e4-aace-600308960668"
     end
 
     test "update_order/2 with invalid data returns error changeset" do

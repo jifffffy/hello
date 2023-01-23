@@ -15,10 +15,10 @@ defmodule Hello.ShoppingCart do
     {:ok, reload_cart(cart)}
   end
 
-  def get_cart_by_user_uuid(user_uuid) do
+  def get_cart_by_user_id(user_id) do
     Repo.one(
       from(c in Cart,
-        where: c.user_uuid == ^user_uuid,
+        where: c.user_id == ^user_id,
         left_join: i in assoc(c, :items),
         left_join: p in assoc(i, :product),
         order_by: [asc: i.inserted_at],
@@ -80,8 +80,8 @@ defmodule Hello.ShoppingCart do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_cart(user_uuid) do
-    %Cart{user_uuid: user_uuid}
+  def create_cart(user_id) do
+    %Cart{user_id: user_id}
     |> Cart.changeset(%{})
     |> Repo.insert()
     |> case do
@@ -90,7 +90,7 @@ defmodule Hello.ShoppingCart do
     end
   end
 
-  defp reload_cart(%Cart{} = cart), do: get_cart_by_user_uuid(cart.user_uuid)
+  defp reload_cart(%Cart{} = cart), do: get_cart_by_user_id(cart.user_id)
 
   def add_item_to_cart(%Cart{} = cart, %Catalog.Product{} = product) do
     %CartItem{quantity: 1, price_when_carted: product.price}

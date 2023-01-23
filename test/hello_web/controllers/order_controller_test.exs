@@ -3,9 +3,9 @@ defmodule HelloWeb.OrderControllerTest do
 
   import Hello.OrdersFixtures
 
-  @create_attrs %{total_price: "120.5", user_uuid: "7488a646-e31f-11e4-aace-600308960662"}
-  @update_attrs %{total_price: "456.7", user_uuid: "7488a646-e31f-11e4-aace-600308960668"}
-  @invalid_attrs %{total_price: nil, user_uuid: nil}
+  @create_attrs %{total_price: "120.5", user_id: "7488a646-e31f-11e4-aace-600308960662"}
+  @update_attrs %{total_price: "456.7", user_id: "7488a646-e31f-11e4-aace-600308960668"}
+  @invalid_attrs %{total_price: nil, user_id: nil}
 
   describe "index" do
     test "lists all orders", %{conn: conn} do

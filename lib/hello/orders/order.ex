@@ -4,7 +4,7 @@ defmodule Hello.Orders.Order do
 
   schema "orders" do
     field :total_price, :decimal
-    field :user_uuid, Ecto.UUID
+    belongs_to :user, Hello.Accounts.User
 
     has_many :line_items, Hello.Orders.LineItem
     has_many :products, through: [:line_items, :product]
@@ -15,7 +15,7 @@ defmodule Hello.Orders.Order do
   @doc false
   def changeset(order, attrs) do
     order
-    |> cast(attrs, [:user_uuid, :total_price])
-    |> validate_required([:user_uuid, :total_price])
+    |> cast(attrs, [:user_id, :total_price])
+    |> validate_required([:user_id, :total_price])
   end
 end
