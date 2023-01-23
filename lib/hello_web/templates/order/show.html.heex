@@ -1,0 +1,23 @@
+<h1>Thank you for your order!</h1>
+
+<ul>
+  <li>
+    <strong>User uuid:</strong>
+    <%= @order.user_uuid %>
+  </li>
+
+  <%= for item <- @order.line_items do %>
+    <li>
+      <%= item.product.title %>
+      (<%= item.quantity %>) - <%= HelloWeb.CartView.currency_to_str(item.price) %>
+    </li>
+  <% end %>
+
+  <li>
+    <strong>Total price:</strong>
+    <%= HelloWeb.CartView.currency_to_str(@order.total_price) %>
+  </li>
+
+</ul>
+
+<span><%= link "Back", to: Routes.cart_path(@conn, :show) %></span>

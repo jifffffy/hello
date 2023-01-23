@@ -1,0 +1,28 @@
+<h1>Listing Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User uuid</th>
+      <th>Total price</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for order <- @orders do %>
+    <tr>
+      <td><%= order.user_uuid %></td>
+      <td><%= order.total_price %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.order_path(@conn, :show, order) %></span>
+        <span><%= link "Edit", to: Routes.order_path(@conn, :edit, order) %></span>
+        <span><%= link "Delete", to: Routes.order_path(@conn, :delete, order), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Order", to: Routes.order_path(@conn, :new) %></span>
